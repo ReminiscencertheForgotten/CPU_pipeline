@@ -1,0 +1,5 @@
+# 不上传生成的build文件夹
+/build
+
+# 不上传Mars文件
+*.jar

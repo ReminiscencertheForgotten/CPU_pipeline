@@ -5,7 +5,6 @@
 `include "./src/design/Basic/Pipes.v"
 `include "./src/design/Basic/ProgramCounter.v"
 `include "./src/design/Basic/RegisterFile.v"
-// `include "./src/design/Peripheral/DataMemory.v"
 `include "./src/design/Peripheral/Bus.v"
 `timescale 1ns/1ps
 
@@ -98,9 +97,6 @@ module CPU (
         .CompareB(CompareB)
     );
 
-    // assign cmp1 = (CompareA == 3)?data_memory.data_r:(CompareA == 2)?pipe3.ALU_result:(CompareA == 1)?alu.result:read_data1;
-    // assign cmp2 = (CompareB == 3)?data_memory.data_r:(CompareB == 2)?pipe3.ALU_result:(CompareB == 1)?alu.result:read_data2;
-
     assign cmp1 = (CompareA == 3)?bus.Read_data:(CompareA == 2)?pipe3.ALU_result:(CompareA == 1)?alu.result:read_data1;
     assign cmp2 = (CompareB == 3)?bus.Read_data:(CompareB == 2)?pipe3.ALU_result:(CompareB == 1)?alu.result:read_data2;
 
@@ -187,16 +183,6 @@ module CPU (
 
     assign Data_memory_write = (ForwardC == 1)?pipe4.ALU_result:pipe3.write_data;
 
-    // DataMemory data_memory(
-    //     .clk(clk), .reset(reset),
-    //     .MemWr(pipe3.MemWr),
-    //     .MemRead(pipe3.MemRead),
-    //     .addr(pipe3.ALU_result),
-    //     .WordorByte(pipe3.WordorByte),
-    //     .data_w(Data_memory_write),
-    //     .data_r(Data_memory_read)
-    // );
-
     Bus bus(
         .clk(clk), .reset(reset),
         .Write_enable(pipe3.MemWr),
@@ -217,7 +203,6 @@ module CPU (
         .MEM_RegWr(pipe3.RegWr),
         .MEM_PC_jump(pipe3.PC_jump)
     );
-
 
     // WB Stage
     assign WB_write_data = (pipe4.MemtoReg == 0)?pipe4.ALU_result:
