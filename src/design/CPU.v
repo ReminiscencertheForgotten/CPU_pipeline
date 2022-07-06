@@ -188,7 +188,6 @@ module CPU (
         .Write_enable(pipe3.MemWr),
         .Read_enable(pipe3.MemRead),
         .Addr(pipe3.ALU_result),
-        .SystemUse(1'b1),
         .WordorByte(pipe3.WordorByte),
         .Write_data(Data_memory_write),
         .Read_data(Data_memory_read)

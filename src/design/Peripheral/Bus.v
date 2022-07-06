@@ -7,15 +7,14 @@ module Bus (
     input Write_enable,
     input Read_enable,
     input WordorByte,
-    input SystemUse,
     input [31:0] Addr,
     input [31:0] Write_data,
     output [31:0] Read_data
 );
     wire Dm_wen, Dm_ren;
     wire [31:0] Dm_data_r;
-    assign Dm_wen = Write_enable && (Addr < 32'h00000800 || SystemUse);
-    assign Dm_ren = Read_enable && (Addr < 32'h00000800 || SystemUse);
+    assign Dm_wen = Write_enable && (Addr < 32'h40000000);
+    assign Dm_ren = Read_enable && (Addr < 32'h40000000);
     DataMemory data_memory(
         .clk(clk), .reset(reset),
         .MemWr(Dm_wen),
