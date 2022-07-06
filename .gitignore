@@ -6,3 +6,6 @@
 
 # 不上传硬件相关的文件
 /src/config
+
+# 不上传测试代码
+/src/bin/test.asm
