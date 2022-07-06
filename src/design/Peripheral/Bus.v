@@ -14,7 +14,6 @@ module Bus (
 );
     wire Dm_wen, Dm_ren;
     wire [31:0] Dm_data_r;
-    // TODO: change the addr in asm !!!!!!
     assign Dm_wen = Write_enable && (Addr < 32'h00000800 || SystemUse);
     assign Dm_ren = Read_enable && (Addr < 32'h00000800 || SystemUse);
     DataMemory data_memory(

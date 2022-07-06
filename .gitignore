@@ -3,3 +3,6 @@
 
 # 不上传Mars文件
 *.jar
+
+# 不上传硬件相关的文件
+/src/config
