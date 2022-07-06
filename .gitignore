@@ -8,4 +8,4 @@
 /src/config
 
 # 不上传测试代码
-/src/bin/test.asm
+/src/bin

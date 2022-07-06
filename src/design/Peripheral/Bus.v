@@ -25,22 +25,18 @@ module Bus (
     );
 
     reg [31:0] BCD_value;
-    reg [31:0] sys_cnt;
-
     wire [31:0] cnt;
-    assign cnt = sys_cnt;
     Sysclk sys_clk(.clk(clk), .reset(reset), .number(cnt));
 
     always @(*) begin
         if (Write_enable && ~Dm_wen) begin
             case (Addr)
                 32'h40000010: BCD_value <= Write_data;
-                32'h40000014: sys_cnt <= Write_data;
             endcase
         end
     end
 
     assign Read_data = (~Read_enable)?32'h0:(Dm_ren)?Dm_data_r:
-                        (Addr == 32'h40000010)?BCD_value:sys_cnt;
+                        (Addr == 32'h40000010)?BCD_value:cnt;
 
 endmodule //Bus
