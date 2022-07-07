@@ -13,8 +13,8 @@ module Bus (
 );
     wire Dm_wen, Dm_ren;
     wire [31:0] Dm_data_r;
-    assign Dm_wen = Write_enable && (Addr < 32'h40000000);
-    assign Dm_ren = Read_enable && (Addr < 32'h40000000);
+    assign Dm_wen = Write_enable && (Addr != 32'h40000010) && (Addr != 32'h40000014);
+    assign Dm_ren = Read_enable && (Addr != 32'h40000010) && (Addr != 32'h40000014);
     DataMemory data_memory(
         .clk(clk), .reset(reset),
         .MemWr(Dm_wen),
