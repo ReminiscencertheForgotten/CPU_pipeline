@@ -9,7 +9,9 @@ module Bus (
     input WordorByte,
     input [31:0] Addr,
     input [31:0] Write_data,
-    output [31:0] Read_data
+    output [31:0] Read_data,
+    output [3:0] an,
+    output [6:0] leds
 );
     wire Dm_wen, Dm_ren;
     wire [31:0] Dm_data_r;
@@ -25,12 +27,18 @@ module Bus (
 
     reg [31:0] BCD_value;
     wire [31:0] cnt;
+    reg [3:0] an_r;
+    reg [6:0] leds_r;
     Sysclk sys_clk(.clk(clk), .reset(reset), .number(cnt));
 
-    always @(*) begin
+    always @(posedge clk) begin
         if (Write_enable && ~Dm_wen) begin
             case (Addr)
-                32'h40000010: BCD_value <= Write_data;
+                32'h40000010:begin
+                    BCD_value <= Write_data;
+                    an_r <= Write_data[11:8];
+                    leds_r <= Write_data[6:0];
+                end 
             endcase
         end
     end

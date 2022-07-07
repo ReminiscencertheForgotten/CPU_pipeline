@@ -10,7 +10,9 @@
 
 module CPU (
     input clk, 
-    input reset
+    input reset,
+    output [3:0] an,
+    output [6:0] leds
 );
 
     // IF Stage
@@ -190,7 +192,8 @@ module CPU (
         .Addr(pipe3.ALU_result),
         .WordorByte(pipe3.WordorByte),
         .Write_data(Data_memory_write),
-        .Read_data(Data_memory_read)
+        .Read_data(Data_memory_read),
+        .an(an), .leds(leds)
     );
 
     Pipe_MEM_WB pipe4(
