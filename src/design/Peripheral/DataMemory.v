@@ -15,8 +15,6 @@ module DataMemory (
     integer i = 0;
     always @(posedge clk) begin
         if (reset) begin
-            for (i = 0; i <= 511; i = i + 1)
-                dm[i] = 32'h0;
             $readmemh(DATA_SRC_FILE, dm);
         end
         else begin
