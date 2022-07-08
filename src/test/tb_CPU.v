@@ -5,7 +5,6 @@
 module tb_CPU;
     reg clk;
     reg reset;
-    integer handle = 0;
 
     CPU cpu(.clk(clk), .reset(reset));
 
@@ -19,13 +18,12 @@ module tb_CPU;
     initial begin
         clk = 1'b1;
         reset = 1'b0;
-        handle = $fopen("C:\\Users\\Zs_Byqx2020\\Desktop\\CPU_pipeline\\src\\bin\\pc.txt", "w");
         #(`PERIOD / 2)
         reset = 1'b1;
         #(`PERIOD)
         reset = 1'b0;
 
-        #(`PERIOD * 800)
+        #(`PERIOD * 1500)
         $display("$v0=%d", cpu.register_file.register_data[2]);
         $finish;
     end

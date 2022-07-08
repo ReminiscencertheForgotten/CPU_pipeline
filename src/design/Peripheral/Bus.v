@@ -29,6 +29,8 @@ module Bus (
     wire [31:0] cnt;
     reg [3:0] an_r;
     reg [6:0] leds_r;
+    assign an = an_r;
+    assign leds = leds_r;
     Sysclk sys_clk(.clk(clk), .reset(reset), .number(cnt));
 
     always @(posedge clk) begin
