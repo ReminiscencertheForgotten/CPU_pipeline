@@ -118,29 +118,29 @@ module Pipe_EX_MEM (
     reg WordorByte;
     reg [31:0] PC_jump;
     always @(posedge clk) begin
-    if (reset) begin
-        ALU_result <= 32'b0;
-        write_data <= 32'b0;
-        write_reg <= 5'b0;
-        MemWr <= 1'b0;
-        MemRead <= 1'b0;
-        MemtoReg <= 2'b0;
-        RegWr <= 1'b0;
-        WordorByte <= 1'b0;
-        PC_jump <= 32'b0;
-    end
-    else begin
-        ALU_result <= EX_ALU_result;
-        write_data <= EX_write_data;
-        write_reg <= EX_write_reg;
-        MemWr <= EX_MemWr;
-        MemtoReg <= EX_MemtoReg;
-        RegWr <= EX_RegWr;   
-        WordorByte <= EX_WordorByte;
-        PC_jump <= EX_PC_jump;
-        MemRead <= EX_MemRead;
-    end
-end    
+        if (reset) begin
+            ALU_result <= 32'b0;
+            write_data <= 32'b0;
+            write_reg <= 5'b0;
+            MemWr <= 1'b0;
+            MemRead <= 1'b0;
+            MemtoReg <= 2'b0;
+            RegWr <= 1'b0;
+            WordorByte <= 1'b0;
+            PC_jump <= 32'b0;
+        end
+        else begin
+            ALU_result <= EX_ALU_result;
+            write_data <= EX_write_data;
+            write_reg <= EX_write_reg;
+            MemWr <= EX_MemWr;
+            MemtoReg <= EX_MemtoReg;
+            RegWr <= EX_RegWr;   
+            WordorByte <= EX_WordorByte;
+            PC_jump <= EX_PC_jump;
+            MemRead <= EX_MemRead;
+        end
+    end    
 endmodule
 
 module Pipe_MEM_WB (

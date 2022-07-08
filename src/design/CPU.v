@@ -178,7 +178,6 @@ module CPU (
         .WB_write_reg(pipe4.write_reg),
         .MEM_write_reg(pipe3.write_reg),
         .WB_RegWr(pipe4.RegWr),
-        // .MemWr(data_memory.MemWr),
         .MemWr(bus.Write_enable),
         .ForwardC(ForwardC)
     );
